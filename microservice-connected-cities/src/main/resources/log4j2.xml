@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<Configuration status="info" name="ConnectedCitites" packages="" monitorInterval="30">
+	<Properties>
+		<Property name="log-path">logs/</Property> 
+	</Properties>
+	<Appenders>
+		<Console name="console-log" target="SYSTEM_OUT">
+			<PatternLayout pattern="%-5p: %m%n" /> 
+		</Console>
+		<RollingFile name="SlaLog-RollingFile" fileName="${log-path}/Sla.log" filePattern="${log-path}/Sla.log.%d{yyyy-MM-dd}.gz" immediateFlush="true" append="true" ignoreExceptions="false">
+			<PatternLayout>
+				<Pattern>%m%n</Pattern> 
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy /> 
+				<SizeBasedTriggeringPolicy size="5 MB"/>
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log-path}/">
+					<IfLastModified age="30d" /> 
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingRandomAccessFile name="RestLog-RollingRandomAccessFile" fileName="${log-path}/Rest.log" filePattern="${log-path}/Rest.log.%d{yyyy-MM-dd}.gz" immediateFlush="false" append="true" ignoreExceptions="false">
+			<PatternLayout>
+				<Pattern>%X{custom.timestamp} - %t - %-5p - %m%n</Pattern> 
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy /> 
+				<SizeBasedTriggeringPolicy size="5 MB"/>
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log-path}/">
+					<IfLastModified age="30d" /> 
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingRandomAccessFile>
+	</Appenders>
+	<Loggers>
+		<AsyncLogger name="SLALog" level="info" additivity="false">
+			<AppenderRef ref="SlaLog-RollingFile" /> 
+		</AsyncLogger>
+		<AsyncLogger name="RestLog" level="debug" additivity="false">
+			<AppenderRef ref="RestLog-RollingRandomAccessFile" /> 
+		</AsyncLogger>
+		<Root level="info" includeLocation="false" additivity="false">
+			<AppenderRef ref="console-log" /> 
+		</Root>
+	</Loggers>
+</Configuration>

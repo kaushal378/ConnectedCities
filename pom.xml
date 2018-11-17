@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com</groupId>
+
+	<artifactId>connected</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<target>
+                                <tstamp>
+									<format property="BUILD_DATE_FORMATTED" pattern="EEE, d MMM HH:mm:ss yyyy" />
+								</tstamp>
+
+								<tstamp>
+									<format property="LOCAL_BUILD_DATE_FORMATTED" pattern="d-MMMM-yyyy_HHmmssZ" />
+								</tstamp>
+
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<modules>
+		<module>spring-boot-microservice-eureka-naming-server</module>
+		<module>microservice-connected-cities</module>
+		<module>microsevice-connected</module>
+	</modules>
+
+</project>

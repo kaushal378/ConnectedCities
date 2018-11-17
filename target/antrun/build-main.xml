@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <tstamp>
+    <format property="BUILD_DATE_FORMATTED" pattern="EEE, d MMM HH:mm:ss yyyy"/>
+  </tstamp>
+  <tstamp>
+    <format property="LOCAL_BUILD_DATE_FORMATTED" pattern="d-MMMM-yyyy_HHmmssZ"/>
+  </tstamp>
+</target>
+</project>
