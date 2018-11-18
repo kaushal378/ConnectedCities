@@ -1,19 +1,17 @@
 package com.codeChallange.connectedcities.services;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Scanner;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.codeChallange.connectedcities.constants.Constants;
 import com.codeChallange.connectedcities.dao.Graph;
 import com.codeChallange.connectedcities.interfaces.IConnectedCities;
+import com.codeChallange.connectedcities.interfaces.IReadInput;
 import com.codeChallange.connectedcities.utils.GraphUtils;
 
 @Service
@@ -22,27 +20,13 @@ public class ConnectedCitiesService implements IConnectedCities{
 	@Value("${input.file}")
 	private String fileName;
 	
+	@Autowired
+	IReadInput inputReader;
+	
 	//This method loads input file from classpath and returns it
 	@Override
 	public File loadInputFile() throws IOException{
-		File file = File.createTempFile("city", ".txt");
-		try {
-			System.out.println(fileName);
-			ClassPathResource classPathResource = new ClassPathResource(fileName);
-			InputStream in = classPathResource.getInputStream();
-			
-			file.deleteOnExit();
-			
-			FileOutputStream out = new FileOutputStream(file);
-			IOUtils.copy(in, out);
-			
-			out.close();
-		}catch(IOException ie) {
-			ie.printStackTrace();
-			throw ie;
-		}
-		
-		return file;
+		return inputReader.loadInputFile();
 	}
 	
 	/**** Below method populates graph adjacency list where each city is the vertex and 
