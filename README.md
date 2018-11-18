@@ -63,6 +63,9 @@ Give examples
 
 ## Swagger Link
     UI - http://localhost:8080/swagger-ui.html
+    
+## Assumptions
+1. If input city has space, city name will be provided with %20 in place of space. For ex. New York should be New%20YORK.
 
 ## Running the tests
 
