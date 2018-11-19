@@ -7,7 +7,8 @@ Link to expose MS - http://host_name:port/connected?origin=city1&destination=cit
 
 ## Input Specification
 
-Input will have a file in which each line will have two cities' name separated by comma. Number of lines can be variable. One line of input will have two cities and these two city pairs are connected.
+1. Input will have a file in which each line will have two cities' name separated by comma. Number of lines can be variable. One line of input will have two cities and these two city pairs are connected.
+2. Input file city.text is present in ${baseDir}/scripts/input/ directory and can be modified for testing purposes. Servers need to be rebooted for that to change effect.
 
 ## Output Specification
 
@@ -25,10 +26,6 @@ User need to download the project from github and import the project as existing
 
 To review the code, Eclipse or any other JAVA IDE is needed along with Java 1.8.
 To run the code, Java 1.8 will be needed.
-
-```
-Give examples
-```
 
 ### Installing
 
