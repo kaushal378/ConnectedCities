@@ -8,4 +8,5 @@ public interface IGraph {
 	public void addEdge(String src, String dest);
 	public String toString();
 	public Map<String, Set<String>> getAdjList();
+	public boolean hasVertex(String city);
 }

@@ -71,7 +71,7 @@ public class PrintLogs implements IPrintLogs, Constants{
 		{
 			printToFileEnabled = env.getProperty(PRINT_IN_FILE_ENABLED);
 		}
-		return (printToFileEnabled != null && Y_STRING == printToFileEnabled.charAt(0));
+		return (printToFileEnabled != null && Y_BYTE == printToFileEnabled.charAt(0));
 	}
 
 	private boolean isPrintingReqResToFileEnabled()
@@ -80,7 +80,7 @@ public class PrintLogs implements IPrintLogs, Constants{
 		{
 			printReqResToFileEnabled = env.getProperty(PRINT_REQRES_IN_FILE_ENABLED);
 		}
-		return (printReqResToFileEnabled != null && Y_STRING == printReqResToFileEnabled.charAt(0));
+		return (printReqResToFileEnabled != null && Y_BYTE == printReqResToFileEnabled.charAt(0));
 	}
 
 	private void printRestIO(MSLoggerInfo loggerInfo, String restInput) {

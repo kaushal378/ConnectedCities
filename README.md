@@ -7,7 +7,7 @@ Link to expose MS - http://host_name:port/connected?origin=city1&destination=cit
 
 ## Input Specification
 
-Input will have a file in which each line will have two cities' name separated by comma. Number of lines can be variable. One line of input will have two cities these two city pairs are cconnected.
+Input will have a file in which each line will have two cities' name separated by comma. Number of lines can be variable. One line of input will have two cities and these two city pairs are connected.
 
 ## Output Specification
 
@@ -63,7 +63,12 @@ Give examples
 
 ## Swagger Link
     UI - http://localhost:8080/swagger-ui.html
-    
+
+## Logging
+1. Logging has been implemented and SLA and rest input/output logging can be checked in sla.log and rest.log in ./scripts/logs/
+2. In SLA log, it can be verified by checking the ports printed that loadbalancing is working if more than one server for connected-cities microservices.
+
+
 ## Assumptions
 1. If input city has space, city name will be provided with %20 in place of space. For ex. New York should be New%20YORK.
 
@@ -73,25 +78,18 @@ To test the Microservice, copy and paste the below URL in browser with city1 and
 
 http://localhost:8081/connected?origin=city1&destination=city2
 
-### Break down into end to end tests
+### coding style
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+Object oriented approach has been used throughout the project. Important Classes and methods have been exposed through interfaces so that if similar functionality is needed in future these can be extended through these interfaces. For ex., currently we are taking input city pairs from file, atlhough in furture we can do the same from database if needed.
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+1. Install maven and make sure <mvn -version> command displays the version.
+2. Go to project base directory and run <mvn clean package> command.
+3. This will run the build, copy jars to scripts folder and this script folder can be deployed anywhere.
+4. runServers.sh and stopServers.sh can be used to start and stop all servers.
+5. If new instance of servers are needed, corresponding folders present for that server can be copied, port can changed to an unused port and similar run commands can be added to runServers.sh and stopServers.sh.
+3. DEV can Production profiles can be created having separate dev and prod application.properties and making specific profile active in pom.xml. Though, it has not been implemented.
 
 ## Built With
 
@@ -99,23 +97,6 @@ Add additional notes about how to deploy this on a live system
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Java 1.8](https://www.oracle.com/technetwork/java/javase/overview/index.html)
 
-## Contributing
-
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
 ## Authors
 
 * **Kaushal Kishore** - *Initial work* - [ConnectedCities](https://github.com/kaushal378/ConnectedCities)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc

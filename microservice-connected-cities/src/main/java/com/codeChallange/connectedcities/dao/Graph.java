@@ -46,6 +46,8 @@ public class Graph implements IGraph{
 	}*/
 	
 	public void addEdge(String src, String dest) {
+		src = src.toLowerCase();
+		dest = dest.toLowerCase();
 		if(!hasVertex(src))
 			addVertex(src);
 		if(!hasVertex(dest))
@@ -59,7 +61,7 @@ public class Graph implements IGraph{
 			hm.put(v, new HashSet<String>());
 	}
 	
-	private boolean hasVertex(String v) {
+	public boolean hasVertex(String v) {
 		return hm.containsKey(v);
 	}
 	

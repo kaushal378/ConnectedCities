@@ -2,7 +2,6 @@ package com.codeChallange.connectedcities.services;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,53 +9,52 @@ import org.springframework.stereotype.Service;
 
 import com.codeChallange.connectedcities.constants.Constants;
 import com.codeChallange.connectedcities.dao.Graph;
-import com.codeChallange.connectedcities.interfaces.IConnectedCities;
+import com.codeChallange.connectedcities.interfaces.IConnectedCitiesService;
+import com.codeChallange.connectedcities.interfaces.IGraphOperations;
 import com.codeChallange.connectedcities.interfaces.IReadInput;
-import com.codeChallange.connectedcities.utils.GraphUtils;
 
 @Service
-public class ConnectedCitiesService implements IConnectedCities{
-	
-	@Value("${input.file}")
-	private String fileName;
+public class ConnectedCitiesService implements IConnectedCitiesService{
 	
 	@Autowired
 	IReadInput inputReader;
 	
+	@Autowired
+	IGraphOperations graphOperations;
+	
+	@Value("${read.inputs.from.file}")
+	private String readFileIndicator;
+	
+	private static File inputFile = null;
+	
+	private static Graph graph = null;
+	
 	//This method loads input file from classpath and returns it
 	@Override
-	public File loadInputFile() throws IOException{
-		return inputReader.loadInputFile();
+	public void loadInputFile() throws IOException{
+		if(inputFile==null)
+			inputFile = inputReader.loadInputFile();
 	}
 	
 	/**** Below method populates graph adjacency list where each city is the vertex and 
 	 * the list contains the cities directly connected from that vertex.
 	 */
 	@Override
-	public Graph populateGraph(File inputFile) throws IOException {
-		Graph graph = new Graph();
-		try {
-			Scanner scanner = new Scanner(inputFile);
-			while(scanner.hasNextLine()) {
-				String[] inp = scanner.nextLine().split(Constants.FILE_DELIMITER);
-				if(inp.length !=Constants.INPUT_LENGTH)
-					continue;
-				graph.addEdge(inp[0].trim().toLowerCase(), inp[1].trim().toLowerCase());
-			}
-			scanner.close();
-		}catch(IOException io) {
-			throw new IOException();
+	public Graph populateGraph() throws IOException {
+		if(inputFile!=null && graph==null && Constants.Y_STRING.equals(readFileIndicator)) {
+			graph = graphOperations.populateGraphFromFile(graph, inputFile);
 		}
-		//System.out.println(graph.toString());
 		return graph;
 	}
 	
 	@Override
 	public boolean findPath(Graph graph, String src, String dest) {
-		GraphUtils graphUtils = new GraphUtils();
+		if(graph==null)
+			return false;
+		graph.toString();
 		
 		//Call util method isPathBetweenCities to traverse graph adjacency list and find out path; 
-		return graphUtils.isPathBetweenCities(graph, src, dest);
+		return graphOperations.isPathBetweenCities(graph, src, dest);
 	}
 	
 	

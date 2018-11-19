@@ -5,8 +5,9 @@ import java.io.IOException;
 
 import com.codeChallange.connectedcities.dao.Graph;
 
-public interface IConnectedCities {
-	public File loadInputFile() throws IOException;
-	public Graph populateGraph(File file) throws IOException;
+//Interface exposing the business logic of microservice
+public interface IConnectedCitiesService {
+	public void loadInputFile() throws IOException;
+	public Graph populateGraph() throws IOException;
 	public boolean findPath(Graph graph, String src, String dest);
 }

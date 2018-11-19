@@ -20,7 +20,7 @@ public interface Constants {
 	String SLA_LOGGER_NAME = "SLALog";
 	String PRINT_IN_FILE_ENABLED = "print.in.file.enabled";
 	String PRINT_REQRES_IN_FILE_ENABLED = "print.reqres.in.file.enabled";
-	char Y_STRING = 'Y';
+	char Y_BYTE = 'Y';
 	String SINGLE_SPACE = " ";
 	String HYPHEN = "-";
 	String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss:SSS";
@@ -31,4 +31,6 @@ public interface Constants {
 	String FILE_DELIMITER = ",";
 	String YES_STRING = "yes";
 	String NO_STRING = "no";
+	String INPUT_READ_FROM_FILE = "read.inputs.from.file";
+	String Y_STRING = "Y";
 }
